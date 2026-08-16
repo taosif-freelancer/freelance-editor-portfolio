@@ -1,0 +1,5 @@
+import { ArrowUpRight } from 'lucide-react'
+import { useScrollReveal } from '../hooks/useScrollReveal'
+import { siteConfig } from '../data/siteConfig'
+import { ParagraphMark } from '../components/EditMarks'
+export default function FiverrCTA(){const revealRef=useScrollReveal();return <section ref={revealRef} className="bg-ink text-paper"><div className="container-custom py-24 sm:py-28 text-center"><div data-reveal className="reveal"><ParagraphMark className="text-redline/70 text-3xl"/><h2 className="mt-4 font-display text-3xl sm:text-5xl leading-tight max-w-2xl mx-auto">Have a document that needs a professional touch?</h2><p className="mt-5 text-paper/70 max-w-md mx-auto leading-relaxed">Send me your requirements through Fiverr and let’s discuss how I can improve your content.</p><a href={siteConfig.fiverrUrl} target="_blank" rel="noopener noreferrer" className="mt-9 inline-flex items-center gap-2 bg-redline text-paper px-8 py-4 text-sm font-medium tracking-wide rounded-[2px] hover:bg-redline-dark transition-colors duration-300">Visit My Fiverr Profile<ArrowUpRight size={16}/></a></div></div></section>}
