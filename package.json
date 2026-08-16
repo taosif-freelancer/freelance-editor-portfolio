@@ -6,7 +6,7 @@
   "description": "Personal freelancer portfolio website — editing, proofreading, formatting & content services.",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "node build.mjs",
     "preview": "vite preview",
     "lint": "eslint src --ext js,jsx"
   },
