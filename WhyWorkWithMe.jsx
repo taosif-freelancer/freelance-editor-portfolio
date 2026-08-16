@@ -1,0 +1,42 @@
+import { Focus, MessagesSquare, Layers, Eye, AlignLeft, ClipboardCheck } from 'lucide-react'
+import { useScrollReveal } from '../hooks/useScrollReveal'
+import { whyWorkWithMe } from '../data/services'
+
+const iconMap = { Focus, MessagesSquare, Layers, Eye, AlignLeft, ClipboardCheck }
+
+export default function WhyWorkWithMe() {
+  const revealRef = useScrollReveal()
+
+  return (
+    <section id="why" ref={revealRef} className="py-24 sm:py-32 border-t border-line">
+      <div className="container-custom">
+        <div data-reveal className="reveal max-w-xl">
+          <p className="eyebrow">Why Work With Me</p>
+          <h2 className="mt-3 font-display text-3xl sm:text-4xl text-ink">
+            What working together looks like
+          </h2>
+        </div>
+
+        <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-10">
+          {whyWorkWithMe.map((item, index) => {
+            const Icon = iconMap[item.icon]
+            return (
+              <div
+                key={item.title}
+                data-reveal
+                className="reveal border-t border-line pt-6"
+                style={{ transitionDelay: `${0.05 * index}s` }}
+              >
+                {Icon && <Icon size={20} strokeWidth={1.75} className="text-redline" />}
+                <h3 className="mt-4 font-display text-lg text-ink">{item.title}</h3>
+                <p className="mt-2 text-sm text-ink-soft leading-relaxed">
+                  {item.description}
+                </p>
+              </div>
+            )
+          })}
+        </div>
+      </div>
+    </section>
+  )
+}

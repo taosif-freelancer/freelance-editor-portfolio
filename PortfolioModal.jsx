@@ -1,0 +1,120 @@
+import { useEffect, useRef } from 'react'
+import { X } from 'lucide-react'
+
+export default function PortfolioModal({ project, onClose }) {
+  const closeButtonRef = useRef(null)
+  const dialogRef = useRef(null)
+
+  // Lock background scroll, move focus into the dialog, restore on close.
+  useEffect(() => {
+    const previouslyFocused = document.activeElement
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    closeButtonRef.current?.focus()
+
+    const onKeyDown = (e) => {
+      if (e.key === 'Escape') {
+        onClose()
+        return
+      }
+      // Simple focus trap
+      if (e.key === 'Tab' && dialogRef.current) {
+        const focusable = dialogRef.current.querySelectorAll(
+          'button, a[href], [tabindex]:not([tabindex="-1"])'
+        )
+        if (focusable.length === 0) return
+        const first = focusable[0]
+        const last = focusable[focusable.length - 1]
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault()
+          last.focus()
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault()
+          first.focus()
+        }
+      }
+    }
+    document.addEventListener('keydown', onKeyDown)
+
+    return () => {
+      document.removeEventListener('keydown', onKeyDown)
+      document.body.style.overflow = previousOverflow
+      if (previouslyFocused instanceof HTMLElement) previouslyFocused.focus()
+    }
+  }, [onClose])
+
+  if (!project) return null
+
+  return (
+    <div
+      className="fixed inset-0 z-[100] flex items-end sm:items-center justify-center p-0 sm:p-6 animate-fade-in"
+      onMouseDown={(e) => {
+        if (e.target === e.currentTarget) onClose()
+      }}
+    >
+      <div className="absolute inset-0 bg-ink/50 backdrop-blur-sm" aria-hidden="true" />
+
+      <div
+        ref={dialogRef}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="portfolio-modal-title"
+        className="relative w-full sm:max-w-2xl max-h-[90vh] overflow-y-auto bg-paper border border-line sm:rounded-[3px] shadow-2xl animate-scale-in"
+      >
+        <div className="sticky top-0 flex items-center justify-between border-b border-line bg-paper px-6 sm:px-8 py-4">
+          <span className="section-label">{project.category}</span>
+          <button
+            ref={closeButtonRef}
+            type="button"
+            onClick={onClose}
+            aria-label="Close project details"
+            className="inline-flex h-9 w-9 items-center justify-center text-ink-soft hover:text-redline transition-colors"
+          >
+            <X size={20} />
+          </button>
+        </div>
+
+        <div className="px-6 sm:px-8 py-7">
+          <p className="eyebrow">{project.type}</p>
+          <h3
+            id="portfolio-modal-title"
+            className="mt-2 font-display text-2xl sm:text-3xl text-ink"
+          >
+            {project.title}
+          </h3>
+
+          <p className="mt-4 text-ink-soft leading-relaxed">{project.detail}</p>
+
+          <div className="mt-6">
+            <p className="section-label mb-3">Services performed</p>
+            <div className="flex flex-wrap gap-2">
+              {project.services.map((service) => (
+                <span
+                  key={service}
+                  className="text-xs font-mono text-ink-soft border border-line px-3 py-1.5 rounded-[2px]"
+                >
+                  {service}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {project.hasBeforeAfter && (
+            <div className="mt-8 border border-line rounded-[2px] p-5 bg-paper-dim">
+              <p className="section-label mb-2">Preview</p>
+              <p className="text-sm text-ink-faint italic">
+                [Add an optional before/after excerpt or preview image here once you
+                have a real project and appropriate permission to display it.]
+              </p>
+            </div>
+          )}
+
+          <p className="mt-8 text-xs text-ink-faint leading-relaxed">
+            Portfolio samples are displayed with appropriate permission or are
+            presented as demonstrations.
+          </p>
+        </div>
+      </div>
+    </div>
+  )
+}

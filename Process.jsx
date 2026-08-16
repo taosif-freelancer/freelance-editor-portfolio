@@ -1,0 +1,56 @@
+import { UploadCloud, MessageSquareText, Edit3, PackageCheck } from 'lucide-react'
+import { useScrollReveal } from '../hooks/useScrollReveal'
+import { process } from '../data/services'
+
+const iconMap = { UploadCloud, MessageSquareText, Edit3, PackageCheck }
+
+export default function Process() {
+  const revealRef = useScrollReveal()
+
+  return (
+    <section
+      id="process"
+      ref={revealRef}
+      className="py-24 sm:py-32 border-t border-line bg-paper-dim"
+    >
+      <div className="container-custom">
+        <div data-reveal className="reveal max-w-xl">
+          <p className="eyebrow">Process</p>
+          <h2 className="mt-3 font-display text-3xl sm:text-4xl text-ink">
+            How a project runs, start to finish
+          </h2>
+        </div>
+
+        <div className="mt-16 relative">
+          {/* connecting line — desktop only */}
+          <div className="hidden lg:block absolute top-6 left-0 right-0 h-px bg-line" />
+
+          <div className="grid gap-10 lg:grid-cols-4 lg:gap-8">
+            {process.map((step, index) => {
+              const Icon = iconMap[step.icon]
+              return (
+                <div
+                  key={step.number}
+                  data-reveal
+                  className="reveal relative"
+                  style={{ transitionDelay: `${0.08 * index}s` }}
+                >
+                  <div className="relative z-10 inline-flex h-12 w-12 items-center justify-center rounded-full bg-paper border border-ink text-ink">
+                    {Icon && <Icon size={20} strokeWidth={1.75} />}
+                  </div>
+                  <p className="mt-5 font-mono text-xs text-redline">{step.number}</p>
+                  <h3 className="mt-2 font-display text-lg sm:text-xl text-ink">
+                    {step.title}
+                  </h3>
+                  <p className="mt-2 text-sm text-ink-soft leading-relaxed max-w-[22ch]">
+                    {step.description}
+                  </p>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}

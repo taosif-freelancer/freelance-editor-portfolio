@@ -1,0 +1,60 @@
+import { Star, ArrowUpRight, Quote } from 'lucide-react'
+import { useScrollReveal } from '../hooks/useScrollReveal'
+import { reviews } from '../data/reviews'
+import { siteConfig } from '../data/siteConfig'
+
+export default function Reviews() {
+  const revealRef = useScrollReveal()
+
+  return (
+    <section id="reviews" ref={revealRef} className="py-24 sm:py-32 border-t border-line bg-paper-dim">
+      <div className="container-custom">
+        <div data-reveal className="reveal max-w-xl">
+          <p className="eyebrow">Reviews</p>
+          <h2 className="mt-3 font-display text-3xl sm:text-4xl text-ink">
+            From Fiverr clients
+          </h2>
+        </div>
+
+        <div className="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {reviews.map((review, index) => (
+            <div
+              key={review.id}
+              data-reveal
+              className="reveal bg-paper border border-line rounded-[3px] p-7"
+              style={{ transitionDelay: `${0.08 * index}s` }}
+            >
+              <Quote size={20} className="text-redline/50" />
+              <div className="mt-4 flex gap-0.5" aria-label={`${review.rating} out of 5 stars`}>
+                {Array.from({ length: review.rating }).map((_, i) => (
+                  <Star key={i} size={14} className="text-redline fill-redline" />
+                ))}
+              </div>
+              <p className="mt-4 text-ink-soft italic leading-relaxed">
+                &ldquo;{review.quote}&rdquo;
+              </p>
+              <p className="mt-5 text-sm font-mono text-ink-faint">
+                &mdash; {review.author}
+              </p>
+            </div>
+          ))}
+        </div>
+
+        <div data-reveal className="reveal mt-10 flex flex-col sm:flex-row sm:items-center gap-4">
+          <p className="text-sm text-ink-soft">
+            More reviews available on my Fiverr profile.
+          </p>
+          <a
+            href={siteConfig.fiverrUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-outline"
+          >
+            View Fiverr Profile
+            <ArrowUpRight size={16} />
+          </a>
+        </div>
+      </div>
+    </section>
+  )
+}

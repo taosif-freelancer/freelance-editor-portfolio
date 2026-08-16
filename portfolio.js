@@ -1,0 +1,91 @@
+// ─────────────────────────────────────────────────────────────
+// PORTFOLIO DATA
+// These are clearly-labeled PLACEHOLDER samples, not real client
+// work. Replace title/description/services/beforeAfter with your
+// own projects once you have permission to display them.
+// ─────────────────────────────────────────────────────────────
+
+export const categories = [
+  'All',
+  'Editing',
+  'Proofreading',
+  'AI Text Improvement',
+  'Academic',
+  'Formatting',
+  'General Content',
+]
+
+export const portfolioProjects = [
+  {
+    id: 1,
+    category: 'Academic',
+    title: 'Project Sample 01',
+    type: 'Academic Editing',
+    description:
+      '[Replace with a short summary of an academic project — e.g. essay or research-paper editing.]',
+    services: ['Academic editing', 'APA formatting', 'Proofreading'],
+    detail:
+      '[Replace with a longer description: the type of document, the scope of work, and what was improved. Only publish details you have permission to share.]',
+    hasBeforeAfter: true,
+  },
+  {
+    id: 2,
+    category: 'Editing',
+    title: 'Project Sample 02',
+    type: 'Manuscript Editing',
+    description:
+      '[Replace with a short summary — e.g. structural and line editing for a longer piece of writing.]',
+    services: ['Editing', 'Clarity & flow', 'Consistency check'],
+    detail:
+      '[Replace with a longer description of the editing work performed on this sample project.]',
+    hasBeforeAfter: false,
+  },
+  {
+    id: 3,
+    category: 'AI Text Improvement',
+    title: 'Project Sample 03',
+    type: 'AI Text Humanization',
+    description:
+      '[Replace with a short summary — e.g. reworking an AI-assisted draft to read more naturally.]',
+    services: ['AI text humanization', 'Tone adjustment', 'Readability edit'],
+    detail:
+      '[Replace with a longer description. Avoid claiming any guaranteed AI-detection outcome.]',
+    hasBeforeAfter: true,
+  },
+  {
+    id: 4,
+    category: 'Formatting',
+    title: 'Project Sample 04',
+    type: 'Document Formatting',
+    description:
+      '[Replace with a short summary — e.g. cleaning up layout, headings, and spacing in a long document.]',
+    services: ['Document formatting', 'Layout cleanup', 'Style consistency'],
+    detail:
+      '[Replace with a longer description of the formatting work performed on this sample project.]',
+    hasBeforeAfter: false,
+  },
+  {
+    id: 5,
+    category: 'Proofreading',
+    title: 'Project Sample 05',
+    type: 'Final Proofread',
+    description:
+      '[Replace with a short summary — e.g. a final proofreading pass ahead of publication or submission.]',
+    services: ['Proofreading', 'Grammar & spelling', 'Punctuation'],
+    detail:
+      '[Replace with a longer description of the proofreading work performed on this sample project.]',
+    hasBeforeAfter: true,
+  },
+  {
+    id: 6,
+    category: 'General Content',
+    title: 'Project Sample 06',
+    type: 'Blog / Article Editing',
+    description:
+      '[Replace with a short summary — e.g. editing a blog post or article for clarity and tone.]',
+    services: ['General content editing', 'Tone & voice', 'Readability'],
+    detail:
+      '[Replace with a longer description of the content editing work performed on this sample project.]',
+    hasBeforeAfter: false,
+  },
+]
